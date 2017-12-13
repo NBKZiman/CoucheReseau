@@ -1,0 +1,16 @@
+before_install:
+- sudo apt-get update && sudo apt-get install --no-install-recommends texlive-fonts-recommended
+  texlive-latex-extra texlive-fonts-extra texlive-latex-recommended dvipng texlive-lang-french
+  latexmk latex-beamer
+script:
+- mkdir _build
+- latexmk -pdf -output-directory=_build -jobname=reseau reseau.tex
+deploy:
+  provider: releases
+  api_key:
+    secure: sgIT3H4qjQmUmTsiNMIjVx0zxRNqbkO/iWTSYHSv8wZFFDYs6EJ16n2luX/LBfq30rCMj6oyVM9qOEWqeqPj1XqONIW5WdWK96X74fdRrcKGRthU9dFgnedk2STOwsGvs2zDLIXcgS8Am3ClO5Es38mDyFIcTL29rnG/1b9GQUbAjkTVY04fiOXWXqkL/jrPDChD9B42mOQPf43cHF3zOTsINe5l/JTzMPdYfZ09vVrEVFGjxRtAGutNKT/gKvJSDwK9w98vUiTYU1fEMUJn8TZJ3oSx8Tj6GapRAD+va0OLrFf8TqWHuva7LCs3cqK+4rWotaxdzOcCx+ksN1AmOLGyLud6dRMriOxeDed5K2nCchgLgkZvnp/Pj4sXNvUy1/Z4D7SCOWpa+3aTOGSOhA2h1wyZrpDwxnVrHGhXIMbmspTSGb8nLtQZKmGLdfmyyuq7HQiE4b8HUwzY6T2V7k32euQ9MsY/hivG375eQwWTLgHIohOjXM4QYjZaeAVswSFD5Z6ipSSidZk8w0VpUMm1VaovuMJfohFiMvupaT00Ow5ZiEl380JYo5aJEYmENxpy3guKXnHsUZhvQ1IgBbGufuPdx+Xsiq4MUPDaTol/yYlA6tRC57Ny5LXRuBROg7KzapL9xgA5fT6hwkKgOwi4YrTMq02C47aUEkcME4c=
+  file: _build/reseau.pdf
+  skip_cleanup: true
+  on:
+    repo: NBKZiman/CoucheReseau
+tags: true
